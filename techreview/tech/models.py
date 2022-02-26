@@ -33,14 +33,26 @@ class Product(models.Model):
     producturl=models.URLField(null=True, blank=True)
     productdescription=models.TextField()
 
+    def discountAmount(self):
+        self.discount=self.productprice * .05
+        return self.discount
+
+    def discountPrice(self):
+        self.discountedPrice=self.productprice-self.discount
+
+        
+
     def memberdiscount(self):
         discountpercent=.05
         return float(self.productprice) * discountpercent
 
+
+
+
     def __str__(self):
         return self.productname
     
-    class Meta:
+class Meta:
         db_table='product'
         verbose_name_plural='products'
 
